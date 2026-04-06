@@ -9,23 +9,28 @@ env:
 
 jobs:
 
-  test:
 
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    test:
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: temurin
+  runs-on: ubuntu-latest
 
-      - name: Run Maven Tests
-        run: ./mvnw test
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
 
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: temurin
+
+    - name: Give permission to mvnw
+      run: chmod +x mvnw
+
+    - name: Run Maven Tests
+      run: ./mvnw test
+      
   build-and-push:
 
     runs-on: ubuntu-latest
